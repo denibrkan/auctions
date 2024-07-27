@@ -34,7 +34,7 @@ public class AuctionsController : ControllerBase
                     .AsQueryable();
 
         if (!string.IsNullOrEmpty(date))
-            query = query.Where(x => x.DateUpdated.CompareTo(DateTime.Parse(date).ToUniversalTime()) > 0);
+            query = query.Where(x => x.DateUpdated.CompareTo(DateTime.Parse(date).AddSeconds(0.1).ToUniversalTime()) > 0);
 
         return await query.ProjectTo<AuctionDTO>(_mapper.ConfigurationProvider).ToListAsync();
     }
@@ -64,11 +64,12 @@ public class AuctionsController : ControllerBase
 
         _context.Auctions.Add(auction);
 
-        var result = await _context.SaveChangesAsync() > 0;
-
         var newAuction = _mapper.Map<AuctionDTO>(auction);
+        newAuction.Category = _context.ItemCategories.FirstOrDefault(ic => ic.Id == auction.Item.CategoryId).Name;
 
         await _publishEndpoint.Publish(_mapper.Map<AuctionCreated>(newAuction));
+
+        var result = await _context.SaveChangesAsync() > 0;
 
         if (!result) return BadRequest("Could not save changes to the DB");
 
@@ -91,6 +92,16 @@ public class AuctionsController : ControllerBase
         auction.Item.Description = updateAuctionDto.Description;
         auction.DateUpdated = DateTime.UtcNow;
 
+        var auctionUpdated = new AuctionUpdated
+        {
+            Id = auction.Id.ToString(),
+            Title = auction.Item.Title,
+            Description = auction.Item.Description,
+            DateUpdated = auction.DateUpdated
+        };
+
+        await _publishEndpoint.Publish(auctionUpdated);
+
         var result = await _context.SaveChangesAsync() > 0;
 
         if (result) return Ok();
@@ -108,6 +119,8 @@ public class AuctionsController : ControllerBase
         // TODO: check seller == username
 
         _context.Auctions.Remove(auction);
+
+        await _publishEndpoint.Publish(new AuctionDeleted { Id = id.ToString() });
 
         var result = await _context.SaveChangesAsync() > 0;
 

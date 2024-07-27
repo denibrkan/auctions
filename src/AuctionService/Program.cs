@@ -10,6 +10,14 @@ builder.Services.AddNpgsql<AuctionDbContext>(builder.Configuration.GetConnection
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMassTransit(x =>
 {
+    x.AddEntityFrameworkOutbox<AuctionDbContext>(opt =>
+    {
+        opt.QueryDelay = TimeSpan.FromSeconds(10);
+
+        opt.UsePostgres();
+        opt.UseBusOutbox();
+    });
+
     x.UsingRabbitMq((context, configure) =>
     {
         configure.ConfigureEndpoints(context);

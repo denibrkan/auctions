@@ -30,7 +30,7 @@ namespace SearchService.Controllers
                 "finished" => query.Match(x => x.DateEnd < DateTime.UtcNow),
                 "endingSoon" => query.Match(x => x.DateEnd < DateTime.UtcNow.AddHours(6) &&
                                                 x.DateEnd > DateTime.UtcNow),
-                _ => query.Match(x => x.DateEnd > DateTime.UtcNow)
+                _ => query
             };
 
             query.PageNumber(searchObject.PageNumber);

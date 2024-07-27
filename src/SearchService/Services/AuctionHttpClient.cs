@@ -16,7 +16,7 @@ namespace SearchService.Services
 
         public async Task<List<Auction>> GetAuctionsForSearchDbAsync()
         {
-            string lastUpdated = await DB.Find<Auction, string>()
+            var lastUpdated = await DB.Find<Auction, string>()
                                     .Sort(a => a.DateUpdated, Order.Descending)
                                     .Project(a => a.DateUpdated.ToString())
                                     .ExecuteFirstAsync();
