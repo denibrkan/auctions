@@ -1,8 +1,7 @@
 namespace AuctionService.DTOs;
 
-public class AuctionDto
+public class AuctionDTO : BaseDTO
 {
-    public Guid Id { get; set; }
     public int ReservePrice { get; set; }
     public string Seller { get; set; }
     public string Winner { get; set; }
