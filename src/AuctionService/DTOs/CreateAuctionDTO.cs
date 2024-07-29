@@ -12,7 +12,7 @@ public class CreateAuctionDTO
     public string Description { get; set; }
 
     [Required]
-    public string CategoryId { get; set; }
+    public Guid CategoryId { get; set; }
 
     [Required]
     public string ImageUrl { get; set; }
