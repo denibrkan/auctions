@@ -82,7 +82,7 @@ namespace AuctionService.IntegrationTests.Utils
             new Auction
             {
                 Id = Guid.Parse("2b8af7d2-68dd-4dd1-9163-2855b524d022"),
-                Status = Status.NotStarted,
+                Status = Status.Upcoming,
                 ReservePrice = 25000,
                 Seller = "gogo",
                 DateStart = DateTime.UtcNow.AddDays(1),

@@ -66,8 +66,23 @@ public class DbInitializer
             },
             new ItemCategory
             {
+                Id = Guid.Parse("e1879b3c-ff9f-4dd0-9b1f-3daaf597b942"),
+                Name = "Experiences"
+            },
+            new ItemCategory
+            {
+                Id = Guid.Parse("6e72b67a-5ae2-4b7d-b725-6d9fdb2dfd53"),
+                Name = "Art"
+            },
+            new ItemCategory
+            {
+                Id = Guid.Parse("bc05ec19-7306-40df-bcd5-4e21edc4b354"),
+                Name = "Sports Gear"
+            },
+            new ItemCategory
+            {
                 Id = Guid.Parse("c67266a7-0ebd-4a35-a1ca-8fce08dd03bb"),
-                Name = "Aviation"
+                Name = "Other"
             }
         };
 
@@ -76,24 +91,8 @@ public class DbInitializer
 
         var auctions = new List<Auction>()
         {
-            // 1 Porsche 996
-            new Auction
-            {
-                Id = Guid.Parse("afbee524-5972-4075-8800-7d1f9d7b0a0c"),
-                Status = Status.Live,
-                ReservePrice = 45000,
-                Seller = "bob",
-                DateStart = DateTime.UtcNow,
-                DateEnd = DateTime.UtcNow.AddDays(10),
-                Item = new Item
-                {
-                    Title = "Porsche 996",
-                    Description = "A stunning Porsche 996 in excellent condition, featuring a powerful engine and luxurious interior.",
-                    ImageUrl = "https://cdn.pixabay.com/photo/2020/10/18/16/45/porsche-5665390_1280.jpg",
-                    CategoryId = categories.First(c => c.Name == "Cars").Id
-                }
-            },
-            // 2 Mercedes SL500
+            
+            // 1 Mercedes SL500
             new Auction
             {
                 Id = Guid.Parse("1c776394-4cc1-4510-8096-a25da78cf447"),
@@ -108,6 +107,23 @@ public class DbInitializer
                     Description = "A classic Mercedes SL500 convertible with low mileage and impeccable maintenance.",
                     ImageUrl = "https://cdn.pixabay.com/photo/2018/09/20/14/23/mercedes-190-sl-3690985_1280.jpg",
                     CategoryId = categories.First(c => c.Name == "Cars").Id
+                }
+            },
+            // 2 Scuba Diving Gear
+            new Auction
+            {
+                Id = Guid.Parse("70adb03a-0abc-4ffb-9c1b-78aa72e10d3b"),
+                Status = Status.Live,
+                ReservePrice = 200,
+                Seller = "pedro",
+                DateStart = DateTime.UtcNow.AddDays(-1),
+                DateEnd = DateTime.UtcNow.AddHours(8),
+                Item = new Item
+                {
+                    Title = "Scuba Diving Gear",
+                    Description = "Able to last 2 minutes under the water. Professional gear.",
+                    ImageUrl = "https://cdn.pixabay.com/photo/2015/11/18/16/38/diving-1049477_960_720.jpg",
+                    CategoryId = categories.First(c => c.Name == "Other").Id
                 }
             },
             // 3 Rolex Submariner
@@ -131,7 +147,7 @@ public class DbInitializer
             new Auction
             {
                 Id = Guid.Parse("2b8af7d2-68dd-4dd1-9163-2855b524d022"),
-                Status = Status.NotStarted,
+                Status = Status.Upcoming,
                 ReservePrice = 25000,
                 Seller = "gogo",
                 DateStart = DateTime.UtcNow.AddDays(1),
@@ -161,7 +177,93 @@ public class DbInitializer
                     CategoryId = categories.First(c => c.Name == "Musical Instruments").Id
                 }
             },
-
+            // 6 Watch
+            new Auction
+            {
+                Id = Guid.Parse("4e6a11f5-d0a8-4eb3-9e60-1a0d5e6e8a56"),
+                Status = Status.Live,
+                ReservePrice = 15000,
+                Seller = "james",
+                DateStart = DateTime.UtcNow.AddDays(-5),
+                DateEnd = DateTime.UtcNow.AddDays(2),
+                Item = new Item
+                {
+                    Title = "Luxury Swiss Watch",
+                    Description = "A pristine luxury Swiss watch with precision timekeeping and elegant design.",
+                    ImageUrl = "https://cdn.pixabay.com/photo/2022/06/09/12/23/watch-7252465_1280.jpg",
+                    CategoryId = categories.First(c => c.Name == "Watches").Id
+                }
+            },
+            // 7 Car
+            new Auction
+            {
+                Id = Guid.Parse("3a2d7a5e-8c7b-4a22-9a28-8fbc97ae24e8"),
+                Status = Status.Upcoming,
+                ReservePrice = 80000,
+                Seller = "maria",
+                DateStart = DateTime.UtcNow.AddDays(1),
+                DateEnd = DateTime.UtcNow.AddDays(10),
+                Item = new Item
+                {
+                    Title = "Classic Volskwagen",
+                    Description = "A restored classic sports car with modern upgrades and high performance.",
+                    ImageUrl = "https://cdn.pixabay.com/photo/2016/03/27/19/44/car-1283947_640.jpg",
+                    CategoryId = categories.First(c => c.Name == "Cars").Id
+                }
+            },
+            // 8 Painting
+            new Auction
+            {
+                Id = Guid.Parse("7d6e5f3b-bbb6-4fd5-88f0-caf2e3836d7e"),
+                Status = Status.Live,
+                ReservePrice = 20000,
+                Seller = "linda",
+                DateStart = DateTime.UtcNow.AddDays(-2),
+                DateEnd = DateTime.UtcNow.AddDays(5),
+                Item = new Item
+                {
+                    Title = "Vintage Oil Painting",
+                    Description = "A vintage oil painting from a renowned artist, capturing a serene landscape.",
+                    ImageUrl = "https://cdn.pixabay.com/photo/2015/03/30/11/01/paintings-698290_1280.jpg",
+                    CategoryId = categories.First(c => c.Name == "Art").Id
+                }
+            },
+            // 9 Signed Football Shirt
+            new Auction
+            {
+                Id = Guid.Parse("1c7f7bbd-2e88-4d5e-9071-5a3c81b176bc"),
+                Status = Status.Upcoming,
+                ReservePrice = 120,
+                Seller = "alex",
+                DateStart = DateTime.UtcNow.AddDays(2),
+                DateEnd = DateTime.UtcNow.AddDays(12),
+                Item = new Item
+                {
+                    Title = "Signed Football Shirt",
+                    Description = "",
+                    ImageUrl = "https://cdn.pixabay.com/photo/2020/08/02/09/25/jersey-5457156_1280.jpg",
+                    CategoryId = categories.First(c => c.Name == "Sports Gear").Id
+                }
+            },
+            // 10 Experience
+            new Auction
+            {
+                Id = Guid.Parse("5a4e9a76-d8d6-4f12-b24d-2e3f2d3b45b7"),
+                Status = Status.Finished,
+                ReservePrice = 5000,
+                Seller = "john",
+                SoldAmount = 23000,
+                Winner = "isak",
+                DateStart = DateTime.UtcNow.AddDays(-10),
+                DateEnd = DateTime.UtcNow.AddDays(-5),
+                Item = new Item
+                {
+                    Title = "Luxury Yacht Cruise",
+                    Description = "A week-long luxury yacht cruise through the Mediterranean Sea.",
+                    ImageUrl = "https://cdn.pixabay.com/photo/2022/01/31/23/35/sunset-6985210_1280.jpg",
+                    CategoryId = categories.First(c => c.Name == "Experiences").Id
+                }
+            }
         };
 
         context.AddRange(auctions);

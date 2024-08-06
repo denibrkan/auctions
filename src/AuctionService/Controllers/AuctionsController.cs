@@ -51,7 +51,7 @@ public class AuctionsController : ControllerBase
         auction.Seller = User.Identity.Name;
 
         if (auction.DateStart > DateTime.UtcNow)
-            auction.Status = Status.NotStarted;
+            auction.Status = Status.Upcoming;
 
         if (auction.DateEnd <= auction.DateStart)
             return BadRequest("Invalid start and end dates for the auction");
